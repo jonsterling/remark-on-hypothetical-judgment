@@ -1,0 +1,291 @@
+\documentclass[11pt]{amsart}
+\usepackage{setspace}
+\usepackage{amssymb}
+\usepackage{proof}
+\usepackage[usenames,dvipsnames,svgnames,table]{xcolor}
+\newtheorem{thm}{Theorem}[section]
+\newtheorem{prop}[thm]{Proposition}
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem{cor}[thm]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[thm]{Definition}
+\newtheorem{example}[thm]{Example}
+%\newtheorem{note}[thm]{Note}
+\theoremstyle{remark}
+\newtheorem{remark}[thm]{Remark}
+\numberwithin{equation}{section}
+
+\def\InputModeColorName{MidnightBlue}
+\def\OutputModeColorName{Maroon}
+\newcommand\InputMode[1]{{\color{\InputModeColorName}{#1}}}
+\newcommand\OutputMode[1]{{\color{\OutputModeColorName}{#1}}}
+
+\newcommand\HypJ[2]{#1\ (#2)}
+\newcommand\GenJ[2]{\vert_{#1}\; #2}
+\newcommand\JJ{\mathcal{J}}
+\newcommand\IsVer[1]{\InputMode{#1}\ \mathit{ver}}
+\newcommand\IsTrue[1]{\InputMode{#1}\ \mathit{true}}
+\newcommand\IsProp[1]{\InputMode{#1}\ \mathit{prop}}
+\newcommand\Member[2]{\InputMode{#1}\in \InputMode{#2}}
+\newcommand\Seq[2]{\InputMode{#1}\vdash #2}
+\newcommand\Nat{\mathbb{N}}
+
+\begin{document}
+
+\title{Remark on the hypothetical judgment}
+
+\author{Jonathan Sterling}
+\address{}
+
+\onehalfspacing
+
+\begin{abstract}
+
+What is the proper explanation of intuitionistic hypothetical judgment, and
+thence propositional implication? The answer to this question is not clearly
+determinate from the writings of Brouwer and Heyting, since in their lifetimes
+they propounded multiple (sometimes conflicting) explanations of the
+hypothetical judgment. To my mind, the determination of an acceptable
+explanation must be, then, an act of abduction and reconstruction, taking
+into account its adequacy for the expression of the bar theorem and, more
+generally, the development of an open-ended framework for transcendental
+arguments in mathematics.
+
+\end{abstract}
+
+\maketitle
+
+\section{Judgments and Propositions}
+
+The distinction between the propositions and the judgments (assertions) is an
+old one, but prior to Martin-L\"of, the significance of assertions was limited
+to the affirmation of the truth of propositions. Following Martin-L\"of
+\cite{siena.lectures}, forms of judgment other than $\IsTrue{P}$ are recognized,
+including $\IsProp{P}$.
+
+What is the difference between a judgment (assertion) on the one hand, and a
+proposition on the other hand? A judgment is an act or an experience, whereas a
+proposition is a mathematical object which may be experienced in different ways:
+for instance, the assertion of the truth of a proposition (i.e.\ $\IsTrue{P}$)
+consists in the fulfillment of the intention expressed by the proposition, and
+the recognition of an object as a proposition (i.e.\ $\IsProp{P}$) is the act of
+understanding this intention.
+
+In addition to the categorical judgments above, higher-order forms of judgment
+are also explained, including the hypothetical judgment and the general
+judgment. Now, the primitive hypothetical judgment
+$\HypJ{\JJ_2}{\JJ_1}$,\footnote{Hypothetical judgment is to be distinguished
+from the sequent judgments $\Seq{\Gamma}{\cdots}$, which is not a higher-order
+judgment at all.} was explained by Martin-L\"of in terms of his definition of a
+hypothetical \emph{proof} or \emph{demonstration}, which is as follows:
+
+\begin{quote}
+  The notion of hypothetical proof [demonstration], in turn, which is a
+primitive notion, is explained by saying that it is a proof [demonstration]
+which, when supplemented by proofs [demonstrations] of the hypotheses, or
+antecedents, becomes a proof [demonstration] of the thesis, or
+consequent.\footnote{
+I prefer the term \emph{demonstration} to the more ambiguous \emph{proof}, since
+the former is clearly an act, whereas the latter may be read as either an act or
+as a mathematical object.
+}
+\cite{siena.lectures}
+\end{quote}
+
+
+In 1956, Heyting propounded his version of what has come to be known as the
+\emph{Brouwer-Heyting-Kolmogorov} interpretation of intuitionistic logic, by
+explaining the assertion conditions of the propositions. Note that where Heyting
+says ``assert a proposition'', in light of Martin-L\"of's clarification, we must
+understand ``assert \emph{the truth of} a proposition''. Heyting's explanation
+of the assertion conditions for the truth of implication were as follows:
+\begin{quote}
+  The implication $p\to q$ may be asserted if and only if we possess a
+  construction $r$, which, joined to any construction proving $p$ (supposing the
+  latter be effected), would automatically effect a construction of $q$. \cite{HeytingA:int}
+\end{quote}
+
+Now, Martin-L\"of would probably consider the parenthetical ``supposing the
+latter be effected'' to be superfluous, since to assume a judgment is the same
+as to assume that you know it \cite{siena.lectures}.
+%%% note that this is not obvious to people who are not PML
+So, Heyting's definition might be rewritten today as:
+
+\begin{quote}
+$\IsTrue{P\to Q}$ may be asserted if and only if we
+possess a construction $r$, which, joined to any demonstration of $\IsTrue{P}$,
+would automatically effect a demonstration of $\IsTrue{Q}$.
+\end{quote}
+
+Martin-L\"of explained the truth of an implication by appealing to the
+hypothetical judgment, so we should be able to factor Heyting's explanation
+through it in a similar way:
+
+\begin{quote}
+  $\IsTrue{P\to Q}$ may be asserted if and only if we may assert $\HypJ{\IsTrue{Q}}{\IsTrue{P}}$.
+\end{quote}
+
+In fact, if we make this transformation, we shall have arrived at something very
+similar to Martin-L\"of's definition of propositional implication. This
+inference is, at least, valid with respect to Martin-L\"of's definition, but it
+is merely an extensional specification for the meaning of the judgment: it
+expresses the material equivalence of the assertions $\IsTrue{P\to Q}$ and
+$\HypJ{\IsTrue{Q}}{\IsTrue{P}}$, but it does not contain an actual
+\emph{explanation} of $\IsTrue{P\to Q}$, which would need to be in the form ``To
+know $\IsTrue{P\to Q}$ is to know...''.
+
+We cannot actually rewrite our definition directly in that style because it is
+impredicative as a definition (as opposed to as a mathematical statement);
+following Dummett \cite{Dummett:Elements} and Martin-L\"of, we must start from a
+distinction between the direct experience of truth (which we shall call
+\emph{verification}) and the indirect experience (which we shall call merely
+\emph{truth}). Then, the intention of a proposition is its verification, and the
+truth of a proposition is the experience of a means of fulfillment for that
+intention:
+
+\begin{quote}
+  To know $\IsVer{P\to Q}$ is to know $\HypJ{\IsTrue{Q}}{\IsTrue{P}}$.
+\end{quote}
+
+Then, to know $\IsTrue{P\to Q}$ is to have a means of verifying $P\to Q$, that
+is, to have a plan to experience $\IsVer{P\to Q}$.
+
+\section{The Proof Interpretation}
+
+When we rewrote Heyting's explanation of the assertion conditions for the truth
+of an implication to appeal to hypothetical judgment, we implicitly assumed that
+the instantiation of Martin-L\"of's hypothetical judgment would preserve the
+meaning of the original statement.
+
+This, however, may be too much to ask, since in modern proof-theoretic accounts
+of meaning, the hypothetical judgment as explained by Martin-L\"of must be
+understood in a very strong sense, where its proof shall be an object with a
+``hole'' in it, which could be plugged with a proof for the antecedent to yield
+a proof for the consequent: that is, it is not enough that one should have a way
+of transforming the proof of the antecedent into proof for the consequent, but
+one must have a uniform way to do so.
+
+Anticipating the ``proof interpretation'' of intuitionistic logic, Brouwer also
+had come to a conclusion similar to this, if not quite equivalent. For Brouwer,
+a hypothetical assertion $\HypJ{\JJ_2}{\JJ_1}$ was essentially an assertion of
+$\JJ_2$ which proceeds by embedding an actual construction of $\JJ_1$ into a
+matrix for a construction of $\JJ_2$. Now, this is not quite the same since it
+requires that $\JJ_1$ be proved, so it corresponds more closely with the notion
+of \emph{cut} than it does with hypothetical judgment---but he does seem to
+agree as far as the uniformity of the partial proof of the consequent is
+concerned.
+
+In case it is not entirely evident, let us reason through what would happen to a
+\emph{proof theory} if proofs of hypothetical judgments could be non-uniform.
+For one, it would cease to be a proof theory, since two crucial properties would
+fail:
+
+\begin{enumerate}
+  \item Proofs are finitary objects.
+  \item It is effectively determinable in finite time whether an object is
+    a proof of a judgment.
+\end{enumerate}
+
+If a proof of $\HypJ{\JJ_2}{\JJ_1}$ were construed as a means of converting
+proofs of $\JJ_1$ into proofs of $\JJ_2$ (as opposed to the proof-with-a-hole
+interpretation), proofs would certainly cease to be finitary objects: for
+instance, a proof of $\GenJ{n}{\HypJ{\JJ(n)}{\Member{n}{\Nat}}}$ would be
+infinitely large, in that it would contain one branch for each natural number.
+Then, the failure of the second property (decidability of wellformedness) is
+immediate.
+
+Proof-theoretic meaning, however, is hopeless anyway as an interpretation of
+intuitionistic logic if one has any intention to justify the creating subject
+\cite{mva:personal}, or even the bar theorem; indeed, the proof-theoretic
+reading of hypothetical judgment specifically rules out the kind of non-uniform
+evidence that is essential in the demonstration of the bar theorem.
+
+\section{The Proper Interpretation of Hypothetical Judgment}
+
+If we return to Heyting's original definition of the assertion $\IsTrue{P\to
+Q}$, it is clear that he would have to accept any mathematical means of
+transforming the construction of $\IsTrue{P}$ into a construction of
+$\IsTrue{Q}$, since the construction $r$ in his definition is not constrained by
+any uniformity condition: it is merely any effective operation which, when
+adjoined with a construction of the premise, effects a construction of the
+conclusion; and moreover, $r$ may proceed by virtue of any of the transcendental
+observations which are possible by virtue of the truth of $P$ having been
+experienced by the subject.
+
+And what of Martin-L\"of? In his type theory, only the introduction rules for
+the types are given, and the elimination rules are ``theorems'' (or admissible
+rules) which are evident only in the non-uniform sense; that is, the
+justifications of the elimination rules proceed by introspection on the possible
+ways in which their premises were experienced. Therefore, if Martin-L\"of's
+uniform hypothetical judgment is to be accepted, it is necessary that the
+statement of the elimination rules be effected using something that permits
+a non-uniform demonstration.
+
+Sundholm and Van Atten \cite{sundholm-mva}, for instance, distinguish between a
+hypothetical proof of $\HypJ{\JJ_2}{\JJ_1}$ and an inference
+$\infer{\JJ_2}{\JJ_1}$ which expresses the closure of mathematics under a rule,
+and say that it is the latter which establishes the bar theorem, and not
+the former.
+
+Martin-L\"of on the other hand says specifically that an inference is to be read
+as a proof of a hypothetical judgment, and so no real progress is made:
+\begin{quote}
+  The difference between an inference and a logical consequence, or hypothetical
+  judgement, is that an inference is a proof of a logical consequence. Thus an
+  inference is the same as a hypothetical proof. \cite{siena.lectures}
+\end{quote}
+
+In light of Martin-L\"of's explanations of the elimination rules which follow
+this statement, we cannot accept his claim that inference is the same as
+hypothetical proof (as he has defined it), because under that definition even
+the following is not a valid inference:
+\[
+  \infer{
+    \IsTrue{P}
+  }{
+    \IsTrue{P\land Q}
+  }
+\]
+
+Why? This purports to be a proof of the judgment
+$\HypJ{\IsTrue{P}}{\IsTrue{P\land Q}}$, which is not evident under the uniform
+explanation of hypothetical judgment. It could be made evident if the definition
+of a proposition consisted in the declaration of both its introduction rules and
+its elimination rules, but in fact, only the introduction rules are given, and
+the elimination rules are simply codifications of common patterns of inference.
+
+Indeed, Martin-L\"of justifies the elimination rules using the non-uniform
+notion of consequence. This rule, for instance, is justified as follows: 
+
+\begin{proof}
+If you know $\IsTrue{P\land Q}$, then you must have a means of verifying $P\land
+Q$, whence you must know both $\IsTrue{P}$ and $\IsTrue{Q}$; the conclusion is
+now immediate.
+\end{proof}
+
+If we are to take the explanation of the elimination rules seriously, then, we
+must read Martin-L\"of as having already a kind of hypothetical judgment whose
+evidence consists in any effective means at all of transforming the evidence for
+the premise into the evidence for the conclusion (we might call this ``material
+consequence'' as opposed to ``logical consequence''), so the use of the uniform
+hypothetical judgment elsewhere has not somehow removed the need for this kind
+of inference.
+
+The uniform explanation of hypothetical judgment also deprives Martin-L\"of's
+framework of a propositional connective as strong as proper intuitionistic
+implication. In spite of Martin-L\"of's statement in the Siena lectures, the
+interpretation of hypothetical judgment as material consequence is also crucial
+for the semantics of his type theory, as noted by Dybjer \cite{dybjer:testing}.
+
+%%% TODO:
+%%% - discuss propositional witnesses
+%%% - realizability as unary logical relations
+%%% - (nuprl) type theory as binary logical relations
+%%% - what do the propositions give us over the judgments? (witnesses, extensional identity)
+%%% - harper's presentation of admissibility & derivability in pfpl
+%%% - noam zeilberger's use of non-uniform hypothetical judgment
+
+\bibliographystyle{plain}
+\bibliography{refs}
+
+\end{document}
