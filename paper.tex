@@ -101,9 +101,8 @@ are also explained, including the hypothetical judgment and the general
 judgment. Now, the primitive hypothetical judgment
 $\HypJ{\JJ_2}{\JJ_1}$,\footnote{Hypothetical judgment is to be distinguished
 from the sequent judgments $\Seq{\Gamma}{\cdots}$, which are not even
-higher-order judgments at all.} was explained by Martin-L\"of in terms of his
-definition of a hypothetical \emph{proof} or \emph{demonstration}, which is as
-follows:
+higher-order judgments at all.} was explained by Martin-L\"of in terms of
+hypothetical \emph{proof} or \emph{demonstration}, which he defined as follows:
 
 \begin{quote}
   The notion of hypothetical proof [demonstration], in turn, which is a
@@ -471,11 +470,11 @@ special cases, conjunction and implication.
     \mid \EqMember{M}{M'}{A}, \EqMember{N}{N'}{[M/x]B}
     \}\\
   \VAL{\Disj{A}{B}} &\equiv
-    \{ \InputMode{\Inl{M}}
-    \mid \Member{M}{A}
+    \{ (\InputMode{\Inl{M}}, \InputMode{\Inl{N}})
+    \mid \EqMember{M}{N}{A}
     \} \cup
-    \{ \InputMode{\Inr{M}}
-    \mid \Member{M}{B}
+    \{ (\InputMode{\Inr{M}}, \InputMode{\Inr{N}})
+    \mid \EqMember{M}{N}{B}
     \}\\
   \EXP{A} &\equiv
     \{ (\InputMode{M}, \InputMode{N})
