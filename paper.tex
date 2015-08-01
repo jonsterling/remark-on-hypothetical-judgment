@@ -121,9 +121,10 @@ says ``assert a proposition'', in light of Martin-L\"of's clarification, we must
 understand ``assert \emph{the truth of} a proposition''. Heyting's explanation
 of the assertion conditions for the truth of implication were as follows:
 \begin{quote}
-  The implication $\Imp{p}{q}$ may be asserted if and only if we possess a
-  construction $r$, which, joined to any construction proving $p$ (supposing the
-  latter be effected), would automatically effect a construction of $q$. \cite{HeytingA:int}
+  The implication $\Imp{\mathfrak{p}}{\mathfrak{q}}$ may be asserted if and only
+if we possess a construction $\mathfrak{r}$, which, joined to any construction
+proving $\mathfrak{p}$ (supposing the latter be effected), would automatically
+effect a construction of $\mathfrak{q}$. \cite{HeytingA:int}
 \end{quote}
 
 Now, Martin-L\"of would probably consider the parenthetical ``supposing the
@@ -183,7 +184,7 @@ of meaning, the hypothetical judgment as explained by Martin-L\"of must be
 understood in a very strong sense, where its proof shall be an object with a
 ``hole'' in it, which could be plugged with a proof for the antecedent to yield
 a proof for the consequent: that is, it is not enough that one should have a way
-of transforming the proof of the antecedent into proof for the consequent, but
+of transforming the proof of the antecedent into a proof of the consequent, but
 one must have a uniform way to do so.
 
 Anticipating the ``proof interpretation'' of intuitionistic logic, Brouwer also
@@ -226,21 +227,21 @@ evidence that is essential in the demonstration of the bar theorem.
 If we return to Heyting's original definition of the assertion
 $\IsTrue{\Imp{P}{Q}}$, it is clear that he would have to accept any mathematical
 means of transforming the construction of $\IsTrue{P}$ into a construction of
-$\IsTrue{Q}$, since the construction $r$ in his definition is not constrained by
-any uniformity condition: it is merely any effective operation which, when
-adjoined with a construction of the premise, effects a construction of the
-conclusion; and moreover, $r$ may proceed by virtue of any of the transcendental
-observations which are possible by virtue of the truth of $P$ having been
-experienced by the subject.
+$\IsTrue{Q}$, since the construction $\mathfrak{r}$ in his definition is not
+constrained by any uniformity condition: it is merely any effective operation
+which, when adjoined with a construction of the premise, effects a construction
+of the conclusion; and moreover, $\mathfrak{r}$ may proceed by virtue of any of
+the transcendental observations which are possible by virtue of the truth of $P$
+having been experienced by the subject.
 
 And what of Martin-L\"of? In his type theory, only the introduction rules for
 the types are given, and the elimination rules are ``theorems'' (or admissible
 rules) which are evident only in the non-uniform sense; that is, the
 justifications of the elimination rules proceed by introspection on the possible
-ways in which their premises were experienced. Therefore, if Martin-L\"of's
-uniform hypothetical judgment is to be accepted, it is necessary that the
-statement of the elimination rules be effected using something that permits
-a non-uniform demonstration.
+ways in which their premises could have been experienced. Therefore, if
+Martin-L\"of's uniform hypothetical judgment is to be accepted, it is necessary
+that the statement of the elimination rules be effected using something that
+permits a non-uniform demonstration.
 
 Sundholm and Van Atten \cite{sundholm-mva}, for instance, distinguish between a
 hypothetical proof of $\HypJ{\JJ_2}{\JJ_1}$ and an inference
@@ -273,10 +274,12 @@ $\HypJ{\IsTrue{P}}{\IsTrue{P\land Q}}$, which is not evident under the uniform
 explanation of hypothetical judgment. It could be made evident if the definition
 of a proposition consisted in the declaration of both its introduction rules and
 its elimination rules, but in fact, only the introduction rules are given, and
-the elimination rules are simply codifications of common patterns of inference.
+the elimination rules are simply codifications of common patterns of reasoning
+from premise to conclusion.
 
 Indeed, Martin-L\"of justifies the elimination rules using the non-uniform
-notion of consequence. This rule, for instance, is justified as follows: 
+(material, rather than logical) consequence. This rule, for instance, is
+justified as follows:
 
 \begin{proof}
 If you know $\IsTrue{P\land Q}$, then you must have a means of verifying $P\land
@@ -287,10 +290,9 @@ now immediate.
 If we are to take the explanation of the elimination rules seriously, then, we
 must read Martin-L\"of as having already at his disposal a kind of hypothetical
 judgment whose evidence consists in any effective means at all of transforming
-the evidence for the premise into the evidence for the conclusion (we might call
-this ``material consequence'' as opposed to ``logical consequence''), so the use
-of the uniform hypothetical judgment elsewhere has not somehow removed the need
-for this kind of inference.
+the demonstration of the premise into a demonstration of the conclusion, so the
+use of the uniform hypothetical judgment elsewhere has not somehow saved us the
+need to explain this kind of inference.
 
 The uniform explanation of hypothetical judgment also deprives Martin-L\"of's
 framework of a propositional connective as strong as proper intuitionistic
@@ -316,10 +318,21 @@ following realizability, a \emph{realizer}.
 
 \subsection{Realizability Models as Unary Logical Relations}
 
-In fact, by replacing the abstract/synthetic explanations of the propositions in
-terms of their verification acts, we can recast them as giving rise to a theory
-of sets or types by explaining them in terms of their verification objects (i.e.
-their canonical witnesses).
+In fact, we can replace the abstract/synthetic explanations of the propositions
+in terms of their verification acts with new explanations in terms of
+verification objects (i.e. their canonical witnesses); then, the verification
+act consists in constructing a verification object.
+
+A proposition is verified just in case there exists a verification object, but
+it is important to understand that this is not to say that a (possibly unknown)
+verification object may exist outside the subject's experience (construction) of
+it. Rather, this is a trivial equivalence, since to say that an object exists it
+the same as to say that the subject has constructed it.\footnote{The idea that
+verification or proof objects exist separately from our experience of them is
+part of the realist ontology which is now espoused by Martin-L\"of
+\cite{prawitz:2012}, contrary to his position at the time of the Siena lectures;
+this view of course cannot be accepted by Brouwerians, who profess a thoroughly
+idealist ontology \cite{sundholm-mva, sundholm:2014}.}
 
 A realizability model in this simple sense amounts to interpreting the
 propositions into unary logical relations. Defining a proposition, then, amounts
@@ -416,7 +429,7 @@ replaced with binary ones (i.e. partial equivalence relations), as follows:
     \Eval{A}{A'} &
     \Eval{M}{M'} &
     \Eval{N}{N'} &
-    \VAL{A'}(\InputMode{M}, \InputMode{N})
+    \VAL{A'}(\InputMode{M'}, \InputMode{N'})
   }\qquad
   \infer={
     \Member{M}{A}
