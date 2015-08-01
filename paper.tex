@@ -1,5 +1,5 @@
 \documentclass[11pt]{amsart}
-\usepackage{setspace}
+\usepackage{setspace,url,hyperref}
 \usepackage{amssymb,stmaryrd}
 \usepackage{proof}
 \usepackage[usenames,dvipsnames,svgnames,table]{xcolor}
@@ -27,15 +27,19 @@
 \newcommand\IsTrue[1]{\InputMode{#1}\ \mathit{true}}
 \newcommand\IsProp[1]{\InputMode{#1}\ \mathit{prop}}
 \newcommand\IsSet[1]{\InputMode{#1}\ \mathit{set}}
+\newcommand\EqSet[2]{\InputMode{#1}=\InputMode{#2}\ \mathit{set}}
 \newcommand\Member[2]{\InputMode{#1}\in \InputMode{#2}}
+\newcommand\EqMember[3]{\InputMode{#1}=\InputMode{#2}\in \InputMode{#3}}
 \newcommand\Seq[2]{\InputMode{#1}\vdash #2}
+\newcommand\SSeq[2]{\InputMode{#1}\vDash #2}
 \newcommand\Eval[2]{\InputMode{#1}\Rightarrow \OutputMode{#2}}
-\newcommand\Nat{\mathbb{N}}
+\newcommand\IsDefined[1]{\InputMode{#1}\ \mathit{defined}}
 
 \newcommand\SEM[1]{\llbracket#1 \rrbracket}
 \newcommand\VAL[1]{\mathcal{V}\SEM{#1}}
 \newcommand\EXP[1]{\mathcal{E}\SEM{#1}}
 
+\newcommand\Nat{\mathbb{N}}
 \newcommand\True{\top}
 \newcommand\False{\bot}
 \newcommand\Imp[2]{#1\supset #2}
@@ -45,7 +49,6 @@
 \newcommand\Pair[2]{\langle #1, #2 \rangle}
 \newcommand\Fst{\mathsf{fst}}
 \newcommand\Ap{\mathsf{ap}}
-\newcommand\IsDefined[1]{\InputMode{#1}\ \mathit{defined}}
 
 \begin{document}
 
@@ -323,58 +326,37 @@ to defining the unary relation $\VAL{P}$ (which is the set of verification
 objects of the proposition $P$); then, a separate logical relation $\EXP{P}$ is
 defined uniformly over all propositions $P$ by appealing to the computation
 $\Eval{M}{N}$ of witnesses to canonical form.
-\begin{align*}
-  \VAL{\True} &\equiv \{\It\}\\
-  \VAL{\False} &\equiv \{\}\\
-  \VAL{\Imp{P}{Q}} &\equiv 
-    \{ \Lam{x}{E}
-    \mid \GenJ{x}{\HypJ{\Member{E}{\EXP{Q}}}{\Member{x}{\EXP{P}}}}
-    \}\\
-  \VAL{\Conj{P}{Q}} &\equiv
-    \{ \Pair{M}{N}
-    \mid \Member{M}{\EXP{P}}, \Member{N}{\EXP{Q}}
-    \}\\
-  \EXP{P} &\equiv
-    \{ M
-    \mid \Eval{M}{M'}, \Member{M'}{\VAL{P}}
-    \}
-\end{align*}
 
-Then, the judgments of the logical theory are explained by appealing to the
-logical relations:
-
-\begin{gather*}
-  \infer={
-    \IsProp{P}
-  }{
-    \IsDefined{\VAL{P}}
-  } \qquad
-  \infer{
-    \IsVer{P}
-  }{
-    \Member{M}{\VAL{P}}
-  }\qquad
-  \infer{
-    \IsTrue{P}
-  }{
-    \Member{M}{\EXP{P}}
-  }
-\end{gather*}
-
-The judgments of a basic theory of sets may also be explained using the logical
-relations:
 \begin{gather*}
   \infer={
     \IsSet{A}
   }{
-    \IsDefined{\VAL{A}}
+    \Eval{A}{A'} &
+    \IsDefined{\VAL{A'}}
   } \qquad
   \infer={
     \Member{M}{A}
   }{
-    \Member{M}{\EXP{A}}
+    \Eval{A}{A'} &
+    \EXP{A'}(\InputMode{M})
   }
 \end{gather*}
+\begin{align*}
+  \VAL{\True} &\equiv \{\InputMode{\It}\}\\
+  \VAL{\False} &\equiv \{\}\\
+  \VAL{\Imp{P}{Q}} &\equiv 
+    \{ \InputMode{\Lam{x}{E}}
+    \mid \GenJ{x}{\HypJ{\Member{E}{Q}}{\Member{x}{P}}}
+    \}\\
+  \VAL{\Conj{P}{Q}} &\equiv
+    \{ \InputMode{\Pair{M}{N}}
+    \mid \Member{M}{P}, \Member{N}{Q}
+    \}\\
+  \EXP{P} &\equiv
+    \{ \InputMode{M}
+    \mid \Eval{M}{M'}, \VAL{P}(\InputMode{M'})
+    \}
+\end{align*}
 
 The material interpretation of the hypothetical judgment is crucial in the
 realizability model; this is because only the verification objects (i.e.
@@ -386,14 +368,14 @@ For instance, it should be the case that $\Lam{x}{\Pair{\It}{\It}}$ is a witness
 of $\Imp{\False}{\True}$. To see if this is the case in the
 model, let us translate this into a concrete statement:
 \begin{gather}
-  \Member{\Lam{x}{\Pair{\It}{\It}}}{\EXP{\Imp{\False}{\True}}}\\
+  \Member{\Lam{x}{\Pair{\It}{\It}}}{\Imp{\False}{\True}}\\
   \Eval{\Lam{x}{\Pair{\It}{\It}}}{\Lam{x}{\Pair{\It}{\It}}}, \quad
-    \Member{\Lam{x}{\Pair{\It}{\It}}}{\VAL{\Imp{\False}{\True}}}\\
+    \VAL{\Imp{\False}{\True}}(\InputMode{\Lam{x}{\Pair{\It}{\It}}})\\
   \GenJ{x}{
-    \HypJ{\Member{\Pair{\It}{\It}}{\EXP{\True}}}{\Member{x}{\EXP{\False}}}
+    \HypJ{\Member{\Pair{\It}{\It}}{\True}}{\Member{x}{\False}}
   }\\
   \GenJ{x}{
-    \HypJ{\Member{\Pair{\It}{\It}}{\EXP{\True}}}{\Eval{x}{M}, \Member{M}{\VAL{\False}}}
+    \HypJ{\Member{\Pair{\It}{\It}}{\True}}{\Eval{x}{M}, \VAL{\False}(\InputMode{M})}
   }
 \end{gather}
 
@@ -408,12 +390,78 @@ proposition in addition to the verification rules.
 
 \subsection{Type Theories as Binary Logical Relations}
 
+The unary logical relations exactly express the content of a realizability
+model, but they still do not yield a theory of sets which is sufficient for
+reasoning about mathematical objects, which have extensional identity. In order
+to consider the equality of of witnesses, the unary logical relations are
+replaced with binary ones (i.e. partial equivalence relations), as follows:
+
+\begin{gather*}
+  \infer={
+    \EqSet{A}{B}
+  }{
+    \Eval{A}{A'} &
+    \Eval{B}{B'} &
+    \InputMode{\VAL{A'}}\equiv\InputMode{\VAL{B'}}
+  }\qquad
+  \infer={
+    \IsSet{A}
+  }{
+   \EqSet{A}{A}
+  }\\
+  \infer={
+    \EqMember{M}{N}{A}
+  }{
+    \Eval{A}{A'} &
+    \Eval{M}{M'} &
+    \Eval{N}{N'} &
+    \VAL{A'}(\InputMode{M}, \InputMode{N})
+  }\qquad
+  \infer={
+    \Member{M}{A}
+  }{
+    \EqMember{M}{M}{A}
+  }
+\end{gather*}
+
+\begin{align*}
+  \VAL{\True} &\equiv \{(\InputMode{\It}, \InputMode{\It})\}\\
+  \VAL{\False} &\equiv \{\}\\
+  \VAL{\Imp{P}{Q}} &\equiv 
+    \{ (\InputMode{\Lam{x}{E}}, \InputMode{\Lam{x}{E'}})
+    \mid \GenJ{y,z}{
+      \HypJ{\EqMember{[y/x]E}{[z/x]E'}{Q}}{\EqMember{x}{y}{P}}
+    }
+    \}\\
+  \VAL{\Conj{P}{Q}} &\equiv
+    \{ (\InputMode{\Pair{M}{N}}, \InputMode{\Pair{M'}{N'}})
+    \mid \EqMember{M}{M'}{P}, \EqMember{N}{N'}{Q}
+    \}\\
+  \EXP{P} &\equiv
+    \{ (\InputMode{M}, \InputMode{N})
+    \mid \Eval{M}{M'}, \Eval{N}{N'}, \VAL{P}(\InputMode{M'}, \InputMode{N'})
+    \}
+\end{align*}
+
+With the extension to the binary logical relation, we now properly treat the
+equivalence of propositions (sets) and of witnesses, and we also have a
+definitive answer to the question, ``What is the purpose of adding a language of
+types and witnesses to the existing system of judgments and their
+demonstrations?''
+
+The judgments and demonstration acts are the activity of the subject in
+performing and experiencing mathematics. On the other hand, the theory of sets
+that we have defined is the correct level at which to \emph{do} mathematics,
+where objects are concrete and have an extensional identity. By guaranteeing
+pervasive functionality, we have embedded in the rich world of intuitionistic
+mathematics a haven safe from the paradoxes that arise from failures of
+extensionality, such as Diaconescu's theorem \cite{sterling:diaconescu}.
+
 %%% TODO:
-%%% - (nuprl) type theory as binary logical relations
-%%% - what do the propositions give us over the judgments? (witnesses, extensional identity)
 %%% - harper's presentation of admissibility & derivability in pfpl
 %%% - noam zeilberger's use of non-uniform hypothetical judgment
 
+\newpage
 \bibliographystyle{plain}
 \bibliography{refs}
 
