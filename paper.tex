@@ -44,11 +44,16 @@
 \newcommand\False{\bot}
 \newcommand\Imp[2]{#1\supset #2}
 \newcommand\Conj[2]{#1\land #2}
+\newcommand\Disj[2]{#1\lor #2}
+\newcommand\Forall[3]{(\forall #2 \in #1)#3}
+\newcommand\Exists[3]{(\exists #2 \in #1)#3}
 \newcommand\It{\star}
 \newcommand\Lam[2]{(\lambda #1) #2}
 \newcommand\Pair[2]{\langle #1, #2 \rangle}
-\newcommand\Fst{\mathsf{fst}}
-\newcommand\Ap{\mathsf{ap}}
+\newcommand\Inl[1]{\mathsf{inl}(#1)}
+\newcommand\Inr[1]{\mathsf{inr}(#1)}
+
+\newcommand\BISH{\textbf{BISH}}
 
 \begin{document}
 
@@ -366,6 +371,13 @@ $\Eval{M}{N}$ of witnesses to canonical form.
     \{ \InputMode{\Pair{M}{N}}
     \mid \Member{M}{P}, \Member{N}{Q}
     \}\\
+  \VAL{\Disj{P}{Q}} &\equiv
+    \{ \InputMode{\Inl{M}}
+    \mid \Member{M}{P}
+    \} \cup
+    \{ \InputMode{\Inr{M}}
+    \mid \Member{M}{Q}
+    \}\\
   \EXP{P} &\equiv
     \{ \InputMode{M}
     \mid \Eval{M}{M'}, \VAL{P}(\InputMode{M'})
@@ -407,7 +419,7 @@ proposition in addition to the verification rules.
 
 \subsection{Type Theories as Binary Logical Relations}
 
-The unary logical relations exactly express the content of a realizability
+The unary logical relations express exactly the content of a realizability
 model, but they still do not yield a theory of sets which is sufficient for
 reasoning about mathematical objects, which have extensional identity. In order
 to consider the equality of of witnesses, the unary logical relations are
@@ -441,24 +453,46 @@ replaced with binary ones (i.e. partial equivalence relations), as follows:
   }
 \end{gather*}
 
+In order to make an important point about functionality, we will define
+intuitionistic existential and universal quantification rather than their
+special cases, conjunction and implication.
+%
 \begin{align*}
   \VAL{\True} &\equiv \{(\InputMode{\It}, \InputMode{\It})\}\\
   \VAL{\False} &\equiv \{\}\\
-  \VAL{\Imp{P}{Q}} &\equiv 
+  \VAL{\Forall{A}{x}{B}} &\equiv 
     \{ (\InputMode{\Lam{x}{E}}, \InputMode{\Lam{x}{E'}})
     \mid \GenJ{y,z}{
-      \HypJ{\EqMember{[y/x]E}{[z/x]E'}{Q}}{\EqMember{x}{y}{P}}
+      \HypJ{\EqMember{[y/x]E}{[z/x]E'}{[y/x]B}}{\EqMember{x}{y}{A}}
     }
     \}\\
-  \VAL{\Conj{P}{Q}} &\equiv
+  \VAL{\Exists{A}{x}{B}} &\equiv
     \{ (\InputMode{\Pair{M}{N}}, \InputMode{\Pair{M'}{N'}})
-    \mid \EqMember{M}{M'}{P}, \EqMember{N}{N'}{Q}
+    \mid \EqMember{M}{M'}{A}, \EqMember{N}{N'}{[M/x]B}
     \}\\
-  \EXP{P} &\equiv
+  \VAL{\Disj{A}{B}} &\equiv
+    \{ \InputMode{\Inl{M}}
+    \mid \Member{M}{A}
+    \} \cup
+    \{ \InputMode{\Inr{M}}
+    \mid \Member{M}{B}
+    \}\\
+  \EXP{A} &\equiv
     \{ (\InputMode{M}, \InputMode{N})
-    \mid \Eval{M}{M'}, \Eval{N}{N'}, \VAL{P}(\InputMode{M'}, \InputMode{N'})
+    \mid \Eval{M}{M'}, \Eval{N}{N'}, \VAL{A}(\InputMode{M'}, \InputMode{N'})
     \}
 \end{align*}
+
+Now, in contrast to the treatment of the quantifiers in formal intuitionistic
+logic (or in the Mitchell-B\'enabou language of a topos
+\cite{maclane-moerdijk}), it is part of their meaning that their verifications
+should respect the equality of the domain of discourse; this constraint is
+called functionality, and reflects the fact that universal quantification is
+taken as a more general form of implication. Within the theory of sets, there is
+simply not a quantifier which expresses non-functional generality; in this way,
+contrary to the state of affairs in \BISH{} \cite{bishop:1967}, the theorem of
+choice is in fact verified by a choice \emph{function}, not merely a choice
+\emph{operation}.
 
 With the extension to the binary logical relation, we now properly treat the
 equivalence of propositions (sets) and of witnesses, and we also have a
@@ -466,12 +500,12 @@ definitive answer to the question, ``What is the purpose of adding a language of
 types and witnesses to the existing system of judgments and their
 demonstrations?''
 
-The judgments and demonstration acts are the activity of the subject in
-performing and experiencing mathematics. On the other hand, the theory of sets
-that we have defined is the correct level at which to \emph{do} mathematics,
+The judgments and demonstrations are the activity of the subject in performing
+and experiencing mathematics. On the other hand, the theory of sets that we have
+defined is, to my mind, the correct level at which to \emph{do} mathematics,
 where objects are concrete and have an extensional identity. By guaranteeing
 pervasive functionality, we have embedded in the rich world of intuitionistic
-mathematics a haven safe from the paradoxes that arise from failures of
+mathematics a haven invulnerable to the paradoxes that arise from failures of
 extensionality, such as Diaconescu's theorem \cite{sterling:diaconescu}.
 
 \section{Related Discussion}
