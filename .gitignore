@@ -8,3 +8,4 @@
 *.fmt
 _region_.*
 auto/paper.el
+*.out
