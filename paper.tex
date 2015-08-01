@@ -90,9 +90,9 @@ including $\IsProp{P}$.
 
 What is the difference between a judgment (assertion) on the one hand, and a
 proposition on the other hand? A judgment is an act or an experience, whereas a
-proposition is a mathematical object which may be experienced in different ways:
-for instance, the assertion of the truth of a proposition (i.e.\ $\IsTrue{P}$)
-consists in the fulfillment of the intention expressed by the proposition, and
+proposition is a mathematical object which may be experienced in different ways.
+For instance, the assertion of the truth of a proposition (i.e.\ $\IsTrue{P}$)
+consists in the fulfillment of the intention expressed by the proposition, while
 the recognition of an object as a proposition (i.e.\ $\IsProp{P}$) is the act of
 understanding this intention.
 
@@ -122,7 +122,7 @@ In 1956, Heyting propounded his version of what has come to be known as the
 \emph{Brouwer-Heyting-Kolmogorov} interpretation of intuitionistic logic, by
 explaining the assertion conditions of the propositions. Note that where Heyting
 says ``assert a proposition'', in light of Martin-L\"of's clarification, we must
-understand ``assert \emph{the truth of} a proposition''. Heyting's explanation
+read ``assert \emph{the truth of} a proposition''. Heyting's explanation
 of the assertion conditions for the truth of implication were as follows:
 \begin{quote}
   The implication $\Imp{\mathfrak{p}}{\mathfrak{q}}$ may be asserted if and only
@@ -160,14 +160,17 @@ $\HypJ{\IsTrue{Q}}{\IsTrue{P}}$, but it does not contain an actual
 \emph{explanation} of $\IsTrue{\Imp{P}{Q}}$, which would need to be in the form ``To
 know $\IsTrue{\Imp{P}{Q}}$ is to know...''.
 
-We cannot actually rewrite our definition directly in that style because it is
-impredicative as a definition (as opposed to as a mathematical statement);
-following Dummett \cite{Dummett:Elements} and Martin-L\"of, we must start from a
-distinction between the direct experience of truth (which we shall call
-\emph{verification}) and the indirect experience (which we shall call merely
-\emph{truth}). Then, the intention of a proposition is its verification, and the
-truth of a proposition is the experience of a means of fulfillment for that
-intention:
+It is tempting to rewrite the definition in the following way:
+\begin{quote}
+  (*) To know $\IsTrue{\Imp{P}{Q}}$ is to know $\HypJ{\IsTrue{Q}}{\IsTrue{P}}$.
+\end{quote}
+
+However, as a definition, this is impredicative. Following Dummett
+\cite{Dummett:Elements} and Martin-L\"of, we must start from a distinction
+between the direct experience of truth (which we shall call \emph{verification})
+and the indirect experience (which we shall just call \emph{truth}). Then, the
+intention of a proposition is its verification, and the truth of a proposition
+is the experience of a means of fulfillment for that intention:
 
 \begin{quote}
   To know $\IsVer{\Imp{P}{Q}}$ is to know $\HypJ{\IsTrue{Q}}{\IsTrue{P}}$.
@@ -234,9 +237,9 @@ means of transforming the construction of $\IsTrue{P}$ into a construction of
 $\IsTrue{Q}$, since the construction $\mathfrak{r}$ in his definition is not
 constrained by any uniformity condition: it is merely any effective operation
 which, when adjoined with a construction of the premise, effects a construction
-of the conclusion; and moreover, $\mathfrak{r}$ may proceed by virtue of any of
-the transcendental observations which are possible by virtue of the truth of $P$
-having been experienced by the subject.
+of the conclusion; and moreover, $\mathfrak{r}$ may proceed by appealing to any
+of the transcendental observations which are possible by virtue of the truth of
+$P$ having been experienced by the subject.
 
 And what of Martin-L\"of? In his type theory, only the introduction rules for
 the types are given, and the elimination rules are ``theorems'' (or admissible
@@ -273,7 +276,7 @@ the following is not a valid inference:
   }
 \]
 
-Why? This purports to be a proof of the judgment
+Why not? This purports to be a proof of the judgment
 $\HypJ{\IsTrue{P}}{\IsTrue{P\land Q}}$, which is not evident under the uniform
 explanation of hypothetical judgment. It could be made evident if the definition
 of a proposition consisted in the declaration of both its introduction rules and
@@ -282,7 +285,7 @@ the elimination rules are simply codifications of common patterns of reasoning
 from premise to conclusion.
 
 Indeed, Martin-L\"of justifies the elimination rules using the non-uniform
-(material, rather than logical) consequence. This rule, for instance, is
+(material, rather than logical) consequence. The above rule, for instance, is
 justified as follows:
 
 \begin{proof}
@@ -294,9 +297,9 @@ now immediate.
 If we are to take the explanation of the elimination rules seriously, then, we
 must read Martin-L\"of as having already at his disposal a kind of hypothetical
 judgment whose evidence consists in any effective means at all of transforming
-the demonstration of the premise into a demonstration of the conclusion, so the
-use of the uniform hypothetical judgment elsewhere has not somehow saved us the
-need to explain this kind of inference.
+the demonstration of the premise into a demonstration of the conclusion. So, the
+use of the uniform hypothetical judgment elsewhere has not relieved us from the
+need to explain the inference from premise to conclusion in an elimination rule.
 
 The uniform explanation of hypothetical judgment also deprives Martin-L\"of's
 framework of a propositional connective as strong as proper intuitionistic
@@ -312,9 +315,9 @@ of ``construction''. Like ``proof'', the term ``construction'' is also ambiguous
 in that it may refer to an act of constructing, and it may also denote a
 concrete mathematical object.
 
-A construction for a judgment is simply the act of coming to know it---if it is
-to be thought of as an object, it is at least a tensed, ephemeral one; this is
-what Martin-L\"of calls a \emph{demonstration}. On the other hand, a
+A construction for a judgment is simply the act of coming to know it: this is
+what Martin-L\"of calls a \emph{demonstration}, and if it is to be thought of as
+an object, it is at least a tensed, ephemeral one. On the other hand, a
 construction for a proposition is a mathematical object, not an experience: it
 is the object that the subject constructs during the verification of a
 proposition. This latter sort of construction is called a \emph{witness}, or,
@@ -324,7 +327,7 @@ following realizability, a \emph{realizer}.
 
 In fact, we can replace the abstract/synthetic explanations of the propositions
 in terms of their verification acts with new explanations in terms of
-verification objects (i.e. their canonical witnesses); then, the verification
+verification objects (i.e.\ their canonical witnesses); then, the verification
 act consists in constructing a verification object.
 
 A proposition is verified just in case there exists a verification object, but
@@ -413,7 +416,7 @@ such $M$.
 
 If we did not have the material consequence at our disposal, then this statement
 would not have been valid, unless we were to eschew the verificationist meaning
-explanation and also add ``use'' rules (i.e. direct eliminations) for each
+explanation and also add ``use'' rules (i.e.\ direct eliminations) for each
 proposition in addition to the verification rules.
 
 \subsection{Type Theories as Binary Logical Relations}
