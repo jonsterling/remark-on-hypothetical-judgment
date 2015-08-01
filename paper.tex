@@ -389,6 +389,9 @@ model, let us translate this into a concrete statement:
     \HypJ{\Member{\Pair{\It}{\It}}{\True}}{\Member{x}{\False}}
   }\\
   \GenJ{x}{
+    \HypJ{\Member{\Pair{\It}{\It}}}{\EXP{\False}(\InputMode{x}}
+  }\\
+  \GenJ{x}{
     \HypJ{\Member{\Pair{\It}{\It}}{\True}}{\Eval{x}{M}, \VAL{\False}(\InputMode{M})}
   }
 \end{gather}
@@ -492,8 +495,6 @@ zeilberger:2008}.
 Thanks to Mark van Atten, Robert Harper, Clarissa Littler, and Danny Gratzer for
 helpful conversations about hypothetical judgment, elimination rules and the bar
 theorem.
-
-\newpage
 
 \nocite{*}
 \bibliographystyle{plain}
