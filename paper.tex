@@ -1,6 +1,6 @@
 \documentclass[11pt]{amsart}
 \usepackage{setspace}
-\usepackage{amssymb}
+\usepackage{amssymb,stmaryrd}
 \usepackage{proof}
 \usepackage[usenames,dvipsnames,svgnames,table]{xcolor}
 \newtheorem{thm}{Theorem}[section]
@@ -26,9 +26,26 @@
 \newcommand\IsVer[1]{\InputMode{#1}\ \mathit{ver}}
 \newcommand\IsTrue[1]{\InputMode{#1}\ \mathit{true}}
 \newcommand\IsProp[1]{\InputMode{#1}\ \mathit{prop}}
+\newcommand\IsSet[1]{\InputMode{#1}\ \mathit{set}}
 \newcommand\Member[2]{\InputMode{#1}\in \InputMode{#2}}
 \newcommand\Seq[2]{\InputMode{#1}\vdash #2}
+\newcommand\Eval[2]{\InputMode{#1}\Rightarrow \OutputMode{#2}}
 \newcommand\Nat{\mathbb{N}}
+
+\newcommand\SEM[1]{\llbracket#1 \rrbracket}
+\newcommand\VAL[1]{\mathcal{V}\SEM{#1}}
+\newcommand\EXP[1]{\mathcal{E}\SEM{#1}}
+
+\newcommand\True{\top}
+\newcommand\False{\bot}
+\newcommand\Imp[2]{#1\supset #2}
+\newcommand\Conj[2]{#1\land #2}
+\newcommand\It{\star}
+\newcommand\Lam[2]{(\lambda #1) #2}
+\newcommand\Pair[2]{\langle #1, #2 \rangle}
+\newcommand\Fst{\mathsf{fst}}
+\newcommand\Ap{\mathsf{ap}}
+\newcommand\IsDefined[1]{\InputMode{#1}\ \mathit{defined}}
 
 \begin{document}
 
@@ -100,7 +117,7 @@ says ``assert a proposition'', in light of Martin-L\"of's clarification, we must
 understand ``assert \emph{the truth of} a proposition''. Heyting's explanation
 of the assertion conditions for the truth of implication were as follows:
 \begin{quote}
-  The implication $p\to q$ may be asserted if and only if we possess a
+  The implication $\Imp{p}{q}$ may be asserted if and only if we possess a
   construction $r$, which, joined to any construction proving $p$ (supposing the
   latter be effected), would automatically effect a construction of $q$. \cite{HeytingA:int}
 \end{quote}
@@ -112,7 +129,7 @@ as to assume that you know it \cite{siena.lectures}.
 So, Heyting's definition might be rewritten today as:
 
 \begin{quote}
-$\IsTrue{P\to Q}$ may be asserted if and only if we
+$\IsTrue{\Imp{P}{Q}}$ may be asserted if and only if we
 possess a construction $r$, which, joined to any demonstration of $\IsTrue{P}$,
 would automatically effect a demonstration of $\IsTrue{Q}$.
 \end{quote}
@@ -122,17 +139,17 @@ hypothetical judgment, so we should be able to factor Heyting's explanation
 through it in a similar way:
 
 \begin{quote}
-  $\IsTrue{P\to Q}$ may be asserted if and only if we may assert $\HypJ{\IsTrue{Q}}{\IsTrue{P}}$.
+  $\IsTrue{\Imp{P}{Q}}$ may be asserted if and only if we may assert $\HypJ{\IsTrue{Q}}{\IsTrue{P}}$.
 \end{quote}
 
 In fact, if we make this transformation, we shall have arrived at something very
 similar to Martin-L\"of's definition of propositional implication. This
 inference is, at least, valid with respect to Martin-L\"of's definition, but it
 is merely an extensional specification for the meaning of the judgment: it
-expresses the material equivalence of the assertions $\IsTrue{P\to Q}$ and
+expresses the material equivalence of the assertions $\IsTrue{Imp{P}{Q}}$ and
 $\HypJ{\IsTrue{Q}}{\IsTrue{P}}$, but it does not contain an actual
-\emph{explanation} of $\IsTrue{P\to Q}$, which would need to be in the form ``To
-know $\IsTrue{P\to Q}$ is to know...''.
+\emph{explanation} of $\IsTrue{Imp{P}{Q}}$, which would need to be in the form ``To
+know $\IsTrue{Imp{P}{Q}}$ is to know...''.
 
 We cannot actually rewrite our definition directly in that style because it is
 impredicative as a definition (as opposed to as a mathematical statement);
@@ -144,11 +161,11 @@ truth of a proposition is the experience of a means of fulfillment for that
 intention:
 
 \begin{quote}
-  To know $\IsVer{P\to Q}$ is to know $\HypJ{\IsTrue{Q}}{\IsTrue{P}}$.
+  To know $\IsVer{Imp{P}{Q}}$ is to know $\HypJ{\IsTrue{Q}}{\IsTrue{P}}$.
 \end{quote}
 
-Then, to know $\IsTrue{P\to Q}$ is to have a means of verifying $P\to Q$, that
-is, to have a plan to experience $\IsVer{P\to Q}$.
+Then, to know $\IsTrue{Imp{P}{Q}}$ is to have a means of verifying $Imp{P}{Q}$, that
+is, to have a plan to experience $\IsVer{Imp{P}{Q}}$.
 
 \section{The Proof Interpretation}
 
@@ -202,9 +219,9 @@ evidence that is essential in the demonstration of the bar theorem.
 
 \section{The Proper Interpretation of Hypothetical Judgment}
 
-If we return to Heyting's original definition of the assertion $\IsTrue{P\to
-Q}$, it is clear that he would have to accept any mathematical means of
-transforming the construction of $\IsTrue{P}$ into a construction of
+If we return to Heyting's original definition of the assertion
+$\IsTrue{\Imp{P}{Q}}$, it is clear that he would have to accept any mathematical
+means of transforming the construction of $\IsTrue{P}$ into a construction of
 $\IsTrue{Q}$, since the construction $r$ in his definition is not constrained by
 any uniformity condition: it is merely any effective operation which, when
 adjoined with a construction of the premise, effects a construction of the
@@ -293,9 +310,103 @@ is the object that the subject constructs during the verification of a
 proposition. This latter sort of construction is called a \emph{witness}, or,
 following realizability, a \emph{realizer}.
 
+\subsection{Realizability Models as Unary Logical Relations}
+
+In fact, by replacing the abstract/synthetic explanations of the propositions in
+terms of their verification acts, we can recast them as giving rise to a theory
+of sets or types by explaining them in terms of their verification objects (i.e.
+their canonical witnesses).
+
+A realizability model in this simple sense amounts to interpreting the
+propositions into unary logical relations. Defining a proposition, then, amounts
+to defining the unary relation $\VAL{P}$ (which is the set of verification
+objects of the proposition $P$); then, a separate logical relation $\EXP{P}$ is
+defined uniformly over all propositions $P$ by appealing to the computation
+$\Eval{M}{N}$ of witnesses to canonical form.
+\begin{align*}
+  \VAL{\True} &\equiv \{\It\}\\
+  \VAL{\False} &\equiv \{\}\\
+  \VAL{\Imp{P}{Q}} &\equiv 
+    \{ \Lam{x}{E}
+    \mid \GenJ{x}{\HypJ{\Member{E}{\EXP{Q}}}{\Member{x}{\EXP{P}}}}
+    \}\\
+  \VAL{\Conj{P}{Q}} &\equiv
+    \{ \Pair{M}{N}
+    \mid \Member{M}{\EXP{P}}, \Member{N}{\EXP{Q}}
+    \}\\
+  \EXP{P} &\equiv
+    \{ M
+    \mid \Eval{M}{M'}, \Member{M'}{\VAL{P}}
+    \}
+\end{align*}
+
+Then, the judgments of the logical theory are explained by appealing to the
+logical relations:
+
+\begin{gather*}
+  \infer={
+    \IsProp{P}
+  }{
+    \IsDefined{\VAL{P}}
+  } \qquad
+  \infer{
+    \IsVer{P}
+  }{
+    \Member{M}{\VAL{P}}
+  }\qquad
+  \infer{
+    \IsTrue{P}
+  }{
+    \Member{M}{\EXP{P}}
+  }
+\end{gather*}
+
+The judgments of a basic theory of sets may also be explained using the logical
+relations:
+\begin{gather*}
+  \infer={
+    \IsSet{A}
+  }{
+    \IsDefined{\VAL{A}}
+  } \qquad
+  \infer={
+    \Member{M}{A}
+  }{
+    \Member{M}{\EXP{A}}
+  }
+\end{gather*}
+
+The material interpretation of the hypothetical judgment is crucial in the
+realizability model; this is because only the verification objects (i.e.
+canonical witnesses) are given. All the non-canonical witnesses are explained
+via computation, and the use of logical consequence instead of material
+consequence in the explanation of $\VAL{\Imp{P}{Q}}$ would have been disastrous.
+
+For instance, it should be the case that $\Lam{x}{\Pair{\It}{\It}}$ is a witness
+of $\Imp{\False}{\True}$. To see if this is the case in the
+model, let us translate this into a concrete statement:
+\begin{gather}
+  \Member{\Lam{x}{\Pair{\It}{\It}}}{\EXP{\Imp{\False}{\True}}}\\
+  \Eval{\Lam{x}{\Pair{\It}{\It}}}{\Lam{x}{\Pair{\It}{\It}}}, \quad
+    \Member{\Lam{x}{\Pair{\It}{\It}}}{\VAL{\Imp{\False}{\True}}}\\
+  \GenJ{x}{
+    \HypJ{\Member{\Pair{\It}{\It}}{\EXP{\True}}}{\Member{x}{\EXP{\False}}}
+  }\\
+  \GenJ{x}{
+    \HypJ{\Member{\Pair{\It}{\It}}{\EXP{\True}}}{\Eval{x}{M}, \Member{M}{\VAL{\False}}}
+  }
+\end{gather}
+
+And at this time, we may discharge the entire hypothetical judgment, since we
+know that the unary relation $\VAL{\False}$ is empty, and so there can be no
+such $M$.
+
+If we did not have the material consequence at our disposal, then this statement
+would not have been valid, unless we were to eschew the verificationist meaning
+explanation and also add ``use'' rules (i.e. direct elimination) for each
+proposition in addition to the verification rules.
 
 %%% TODO:
-%%% - realizability as unary logical relations
 %%% - (nuprl) type theory as binary logical relations
 %%% - what do the propositions give us over the judgments? (witnesses, extensional identity)
 %%% - harper's presentation of admissibility & derivability in pfpl
