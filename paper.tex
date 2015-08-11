@@ -68,13 +68,12 @@
 
 What is the proper explanation of intuitionistic hypothetical judgment, and
 thence propositional implication? The answer to this question is not clearly
-determinate from the writings of Brouwer, Heyting and Kolmogorov, since in their
-lifetimes they propounded multiple (sometimes conflicting) explanations of the
-hypothetical judgment. To my mind, the determination of an
-acceptable explanation must be, then, an act of abduction and reconstruction,
-taking into account its adequacy for the expression of the bar theorem and, more
-generally, the development of an open-ended framework for transcendental
-arguments in mathematics.
+determinate from the writings of Brouwer, Heyting and Kolmogorov, since in
+their lifetimes they propounded multiple (sometimes conflicting) explanations
+of the hypothetical judgment. To my mind, the determination of an acceptable
+explanation must take into account its adequacy for the expression of the bar
+theorem and, more generally, the development of an open-ended framework for
+transcendental arguments in mathematics.
 
 \end{abstract}
 
@@ -363,7 +362,7 @@ $\Eval{M}{N}$ of witnesses to canonical form.
 \begin{align*}
   \VAL{\True} &\equiv \{\InputMode{\It}\}\\
   \VAL{\False} &\equiv \{\}\\
-  \VAL{\Imp{P}{Q}} &\equiv 
+  \VAL{\Imp{P}{Q}} &\equiv
     \{ \InputMode{\Lam{x}{E}}
     \mid \GenJ{x}{\HypJ{\Member{E}{Q}}{\Member{x}{P}}}
     \}\\
@@ -422,7 +421,7 @@ proposition in addition to the verification rules.
 The unary logical relations express exactly the content of a realizability
 model, but they still do not yield a theory of sets which is sufficient for
 reasoning about mathematical objects, which have extensional identity. In order
-to consider the equality of of sets and witnesses, the unary logical relations
+to consider the equality of sets and witnesses, the unary logical relations
 are replaced with binary ones (sc.\ partial equivalence relations), as follows:
 
 \begin{gather*}
@@ -460,10 +459,10 @@ special cases, conjunction and implication.
 \begin{align*}
   \VAL{\True} &\equiv \{(\InputMode{\It}, \InputMode{\It})\}\\
   \VAL{\False} &\equiv \{\}\\
-  \VAL{\Forall{A}{x}{B}} &\equiv 
+  \VAL{\Forall{A}{x}{B}} &\equiv
     \{ (\InputMode{\Lam{x}{E}}, \InputMode{\Lam{x}{E'}})
     \mid \GenJ{y,z}{
-      \HypJ{\EqMember{[y/x]E}{[z/x]E'}{[y/x]B}}{\EqMember{x}{y}{A}}
+      \HypJ{\EqMember{[y/x]E}{[z/x]E'}{[y/x]B}}{\EqMember{y}{z}{A}}
     }
     \}\\
   \VAL{\Exists{A}{x}{B}} &\equiv
