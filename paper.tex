@@ -304,6 +304,36 @@ Contra Martin-L\"of's explanation in the Siena lectures, the interpretation of
 hypothetical judgment as material consequence is crucial for the semantics of
 his type theory, as noted by Dybjer \cite{dybjer:testing}.
 
+\subsection{What is the difference between an inference rule and a hypothetical judgment?}
+
+Is a rule of inference really the same as a consequence or hypothetical
+judgment, as Martin-L\"of claimed? One way to elucidate the differences
+is to consider them in the context of a Beth or Kripke semantics.
+
+The validity of an inference rule $\infer{\JJ_2}{\JJ_1}$ at a world lies in an
+effective transformation of experiences of $\JJ_1$ at that world to experiences
+of $\JJ_2$ at that world; on the other hand, to experience a hypothetical
+judgment $\HypJ{\JJ_2}{\JJ_1}$ at a world is to have a means to transform
+experiences of $\JJ_1$ at any future world into experiences of $\JJ_2$.
+
+Construed in this way, judgments can be explained by specifying when/where they
+are forced; it is a reasonable requirement that if we shall consider $\JJ$ to
+be a judgment, then for any worlds $u\preceq v$, from $u\Vdash\JJ$ we may
+conclude $v\Vdash\JJ$ (this is called \emph{monotonicity}). The hypothetical
+judgment, at least as explained above, preserves the monotonicity of knowledge
+by definition, whereas rules of inference may not in general satisfy this property.
+
+On the contrary, an "admissible rule" $\infer{\JJ_2}{\JJ_1}$ is sensitive to
+changes in the state of knowledge, and may cease to be valid if a previously
+unknown way to experience $\JJ_1$ is found. Such rules may only be construed as
+hypothetical judgments if the acts specified by the meanings of their premises
+are sufficiently circumscribed so as to satisfy the monotonicity requirement.
+
+Martin-L\"of's identification of the rules of logic with hypothetical judgments, then,
+only obtains because the concepts of \emph{verification} of a proposition, and
+(secondarily) \emph{truth} of a proposition are fixed in advance for all time
+by means of \emph{canonical forms} and \emph{computation} respectively.
+
 \section{Realizability and Type Theory}
 
 Now that we have settled upon an explanation for hypothetical judgment, let us
