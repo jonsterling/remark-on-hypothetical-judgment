@@ -1,8 +1,12 @@
-\documentclass[11pt]{amsart}
-\usepackage{setspace,url,hyperref}
-\usepackage{amssymb,stmaryrd}
+\documentclass[11pt]{article}
+\usepackage[tt=false]{libertine}
+\usepackage{url,hyperref}
+\usepackage{amsmath,amsthm,amssymb,stmaryrd}
 \usepackage{proof}
 \usepackage[usenames,dvipsnames,svgnames,table]{xcolor}
+\usepackage{sectsty}
+\allsectionsfont{\sffamily}
+
 \newtheorem{thm}{Theorem}[section]
 \newtheorem{prop}[thm]{Proposition}
 \newtheorem{lem}[thm]{Lemma}
@@ -13,12 +17,9 @@
 %\newtheorem{note}[thm]{Note}
 \theoremstyle{remark}
 \newtheorem{remark}[thm]{Remark}
-\numberwithin{equation}{section}
 
-\def\InputModeColorName{MidnightBlue}
-\def\OutputModeColorName{Maroon}
-\newcommand\InputMode[1]{{\color{\InputModeColorName}{#1}}}
-\newcommand\OutputMode[1]{{\color{\OutputModeColorName}{#1}}}
+\newcommand\InputMode[1]{#1}
+\newcommand\OutputMode[1]{#1}
 
 \newcommand\HypJ[2]{#1\ (#2)}
 \newcommand\GenJ[2]{\vert_{#1}\; #2}
@@ -60,24 +61,23 @@
 \title{Remark on the hypothetical judgment}
 
 \author{Jonathan Sterling}
-\address{}
+\date{Fall 2015}
 
-\onehalfspacing
+\maketitle
 
 \begin{abstract}
 
-What is the proper explanation of intuitionistic hypothetical judgment, and
-thence propositional implication? The answer to this question is not clearly
-determinate from the writings of Brouwer, Heyting and Kolmogorov, since in
-their lifetimes they propounded multiple (sometimes conflicting) explanations
-of the hypothetical judgment. To my mind, the determination of an acceptable
-explanation must take into account its adequacy for the expression of the bar
-theorem and, more generally, the development of an open-ended framework for
-transcendental arguments in mathematics.
+  What is the proper explanation of intuitionistic hypothetical judgment, and
+  thence propositional implication? The answer to this question is not clearly
+  determinate from the writings of Brouwer, Heyting and Kolmogorov, since in
+  their lifetimes they proposed multiple (sometimes conflicting) explanations
+  of the hypothetical judgment. The determination of an acceptable explanation
+  must take into account its adequacy for the expression of the bar theorem
+  and, more generally, the development of an open-ended framework for
+  transcendental arguments in mathematics.
 
 \end{abstract}
 
-\maketitle
 
 \section{Judgments and Propositions}
 
@@ -531,7 +531,7 @@ demonstrations?''
 
 The judgments and demonstrations are the activity of the subject in performing
 and experiencing mathematics. On the other hand, the theory of sets that we have
-defined is, to my mind, the correct level at which to \emph{do} mathematics,
+defined is the correct level at which to \emph{do} mathematics,
 where objects are concrete and have an extensional identity. By guaranteeing
 pervasive functionality, we have embedded in the rich world of intuitionistic
 mathematics a haven invulnerable to the paradoxes that arise from failures of
